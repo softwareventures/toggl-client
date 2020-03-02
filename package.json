@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@softwareventures/toggl",
+  "name": "@softwareventures/toggl-client",
   "version": "0.0.0-development",
   "description": "Client for Toggl API",
   "keywords": [
