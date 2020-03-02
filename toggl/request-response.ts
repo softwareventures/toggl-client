@@ -32,7 +32,7 @@ export function request(client: Client, request: Request<unknown>): Promise<Resp
         ? JSON.stringify(request.body)
         : void 0;
 
-    return client.fetch(resolve(client.mainEndpoint, request.path), {
+    return client.fetch(resolve(client.mainEndpoint + "/", request.path), {
         method: request.method,
         body,
         mode: "cors",
