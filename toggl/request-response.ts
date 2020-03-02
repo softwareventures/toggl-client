@@ -1,11 +1,15 @@
 import {resolve} from "url";
 import {Client} from "../index";
 
+/** @internal */
 export interface Request<T> {
     readonly method: Method;
     readonly path: string;
     readonly body?: T;
 }
+
+/** @internal */
+export type Method = "GET" | "POST";
 
 export type Response<T> = SuccessResponse<T> | ErrorResponse | UnauthenticatedResponse;
 
@@ -25,8 +29,7 @@ export interface UnauthenticatedResponse {
     readonly code: 403;
 }
 
-type Method = "GET" | "POST";
-
+/** @internal */
 export function request(client: Client, request: Request<unknown>): Promise<Response<unknown>> {
     const body = request.method === "POST"
         ? JSON.stringify(request.body)

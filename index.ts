@@ -1,4 +1,5 @@
 import {resolve} from "url";
+export * from "./toggl/request-response";
 
 export interface Client {
     readonly fetch: typeof fetch;
