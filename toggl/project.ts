@@ -70,3 +70,8 @@ export function deleteProject(client: AuthenticatedApiClient, projectId: number)
     return request(client, {method: "DELETE", path: "projects/" + projectId})
         .then(response => response as Response<{}>);
 }
+
+export function deleteProjects(client: AuthenticatedApiClient, projectIds: ReadonlyArray<number>): Promise<Response<{}>> {
+    return request(client, {method: "DELETE", path: "projects/" + projectIds.join(",")})
+        .then(response => response as Response<{}>);
+}
