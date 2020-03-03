@@ -41,3 +41,8 @@ export function deleteClient(apiClient: AuthenticatedApiClient, clientId: number
     return request(apiClient, {method: "DELETE", path: "clients/" + clientId})
         .then(response => response as Response<{}>);
 }
+
+export function getClients(apiClient: AuthenticatedApiClient): Promise<Response<ReadonlyArray<Client>>> {
+    return request(apiClient, {method: "GET", path: "clients"})
+        .then(response => response as Response<ReadonlyArray<Client>>);
+}
