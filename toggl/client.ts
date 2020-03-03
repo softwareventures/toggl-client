@@ -36,3 +36,8 @@ export function updateClient(apiClient: AuthenticatedApiClient, client: UpdateCl
     return request(apiClient, {method: "PUT", path: "clients/" + client.id})
         .then(response => response as Response<Client>);
 }
+
+export function deleteClient(apiClient: AuthenticatedApiClient, clientId: number): Promise<Response<{}>> {
+    return request(apiClient, {method: "DELETE", path: "clients/" + clientId})
+        .then(response => response as Response<{}>);
+}
