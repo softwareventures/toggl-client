@@ -1,16 +1,17 @@
 import {AuthenticatedApiClient} from "./authentication";
 import {request, Response} from "./request-response";
 
-export interface Client {
-    readonly name: string;
-    readonly wid: number;
-    readonly notes?: string;
+export interface Client extends ClientOptions {
+    /** Timestamp indicating when the client was last updated. */
     readonly at: string;
 }
 
 export interface ClientOptions {
+    /** The name of the Client. Must be unique in Workspace. */
     readonly name: string;
+    /** The Workspace ID of the Workspace that contains the Client. */
     readonly wid: number;
+    /** Notes for the client. */
     readonly notes?: string;
 }
 
