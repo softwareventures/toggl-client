@@ -18,3 +18,8 @@ export function createClient(apiClient: AuthenticatedApiClient, client: ClientOp
     return request(apiClient, {method: "POST", path: "clients", body: client})
         .then(response => response as Response<Client>);
 }
+
+export function getClient(apiClient: AuthenticatedApiClient, clientId: number): Promise<Response<Client>> {
+    return request(apiClient, {method: "GET", path: "clients/" + clientId})
+        .then(response => response as Response<Client>);
+}
