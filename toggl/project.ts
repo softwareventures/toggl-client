@@ -1,8 +1,7 @@
 import {AuthenticatedApiClient} from "./authentication";
 import {request, Response} from "./request-response";
 
-export interface Project extends ProjectBase {
-    readonly id: number;
+export interface Project extends UpdateProjectOptions {
     /** False if the Project is archived. */
     readonly active: boolean;
     /** If true, the Project is only visible to Project users. */
@@ -20,6 +19,10 @@ export interface Project extends ProjectBase {
 export interface CreateProjectOptions extends ProjectBase {
     /** ID of the Project to use as a template. */
     readonly template_id?: number;
+}
+
+export interface UpdateProjectOptions extends ProjectBase {
+    readonly id: number;
 }
 
 export interface ProjectBase {
@@ -55,5 +58,10 @@ export function createProject(client: AuthenticatedApiClient, project: CreatePro
 
 export function getProject(client: AuthenticatedApiClient, projectId: number): Promise<Response<Project>> {
     return request(client, {method: "GET", path: "projects/" + projectId})
+        .then(response => response as Response<Project>);
+}
+
+export function updateProject(client: AuthenticatedApiClient, project: UpdateProjectOptions): Promise<Response<Project>> {
+    return request(client, {method: "PUT", path: "projects/" + project.id, body: project})
         .then(response => response as Response<Project>);
 }
