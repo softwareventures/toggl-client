@@ -1,3 +1,6 @@
+import {AuthenticatedClient} from "../index";
+import {request, Response} from "./request-response";
+
 /**
  * @file Authentication and user data
  * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/authentication.md
@@ -36,4 +39,9 @@ export interface User {
     readonly openid_enabled: boolean;
     /** IANA-TZ timezone user has set on the "My profile" page. */
     readonly timezone: string;
+}
+
+export function getCurrentUser(client: AuthenticatedClient): Promise<Response<User>> {
+    return request(client, {method: "GET", path: "me"})
+        .then(response => response as Response<User>);
 }

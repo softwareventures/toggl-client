@@ -1,6 +1,7 @@
 import {resolve} from "url";
 export * from "./toggl/authentication";
 export * from "./toggl/request-response";
+export * from "./toggl/user";
 
 export interface Client {
     readonly fetch: typeof fetch;
