@@ -3,14 +3,14 @@ import {request, Response} from "./request-response";
 
 export interface Client {
     readonly name: string;
-    readonly workspaceId: number;
+    readonly wid: number;
     readonly notes?: string;
     readonly at: string;
 }
 
 export interface ClientOptions {
     readonly name: string;
-    readonly workspaceId: number;
+    readonly wid: number;
     readonly notes?: string;
 }
 
