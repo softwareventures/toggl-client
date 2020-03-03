@@ -10,7 +10,7 @@ export interface Request<T> {
 }
 
 /** @internal */
-export type Method = "GET" | "POST";
+export type Method = "GET" | "POST" | "PUT";
 
 export type Response<T> = SuccessResponse<T> | ErrorResponse | UnauthenticatedResponse;
 
