@@ -1,5 +1,5 @@
 import {resolve} from "url";
-import {Client} from "../index";
+import {ApiClient} from "../index";
 import {Authorization} from "./authentication";
 
 /** @internal */
@@ -31,12 +31,12 @@ export interface UnauthenticatedResponse {
 }
 
 /** @internal */
-export interface ClientWithAuthorization extends Client {
+export interface ApiClientWithAuthorization extends ApiClient {
     readonly authorization: Authorization;
 }
 
 /** @internal */
-export function request(client: Client | ClientWithAuthorization, request: Request<unknown>): Promise<Response<unknown>> {
+export function request(client: ApiClient | ApiClientWithAuthorization, request: Request<unknown>): Promise<Response<unknown>> {
     const body = request.method === "POST"
         ? JSON.stringify(request.body)
         : void 0;
@@ -88,7 +88,7 @@ export function mapResponse<T, U>(f: (data: T) => U): (response: Response<T>) =>
     }
 }
 
-function authorizationHeaders(client: Client | ClientWithAuthorization): Record<string, string> {
+function authorizationHeaders(client: ApiClient | ApiClientWithAuthorization): Record<string, string> {
     if ("authorization" in client) {
         const credentials = "apiToken" in client.authorization
             ? client.authorization.apiToken + ":api_token"

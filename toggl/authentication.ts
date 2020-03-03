@@ -1,4 +1,4 @@
-import {Client, mapResponse} from "../index";
+import {ApiClient, mapResponse} from "../index";
 import {request, Response} from "./request-response";
 import {User} from "./user";
 
@@ -14,15 +14,15 @@ export interface ApiToken {
 }
 
 export interface Authentication {
-    readonly client: AuthenticatedClient;
+    readonly client: AuthenticatedApiClient;
     readonly user: User;
 }
 
-export interface AuthenticatedClient extends Client {
+export interface AuthenticatedApiClient extends ApiClient {
     readonly authorization: ApiToken;
 }
 
-export function authenticate(client: Client, authorization: Authorization): Promise<Response<Authentication>> {
+export function authenticate(client: ApiClient, authorization: Authorization): Promise<Response<Authentication>> {
     return request({...client, authorization}, {method: "GET", path: "me"})
         .then(response => response as Response<User>)
         .then(mapResponse(user => ({

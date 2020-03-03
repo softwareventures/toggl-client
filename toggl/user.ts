@@ -1,4 +1,4 @@
-import {AuthenticatedClient} from "../index";
+import {AuthenticatedApiClient} from "../index";
 import {request, Response} from "./request-response";
 
 /**
@@ -41,7 +41,7 @@ export interface User {
     readonly timezone: string;
 }
 
-export function getCurrentUser(client: AuthenticatedClient): Promise<Response<User>> {
+export function getCurrentUser(client: AuthenticatedApiClient): Promise<Response<User>> {
     return request(client, {method: "GET", path: "me"})
         .then(response => response as Response<User>);
 }

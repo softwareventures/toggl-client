@@ -3,20 +3,20 @@ export * from "./toggl/authentication";
 export * from "./toggl/request-response";
 export * from "./toggl/user";
 
-export interface Client {
+export interface ApiClient {
     readonly fetch: typeof fetch;
     readonly mainEndpoint: string;
     readonly reportsEndpoint: string;
 }
 
-export interface ClientOptions {
+export interface ApiClientOptions {
     readonly fetch: typeof fetch;
     readonly endpoint?: string;
     readonly mainEndpoint?: string;
     readonly reportsEndpoint?: string;
 }
 
-export function createClient(options: ClientOptions): Client {
+export function createApiClient(options: ApiClientOptions): ApiClient {
     const fetch = options.fetch;
     const endpoint = options?.endpoint || "https://toggl.com/";
     const mainEndpoint = resolve(endpoint, options?.mainEndpoint || "api/v8");
