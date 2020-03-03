@@ -65,3 +65,8 @@ export function updateProject(client: AuthenticatedApiClient, project: UpdatePro
     return request(client, {method: "PUT", path: "projects/" + project.id, body: {project}})
         .then(response => response as Response<Project>);
 }
+
+export function deleteProject(client: AuthenticatedApiClient, projectId: number): Promise<Response<{}>> {
+    return request(client, {method: "DELETE", path: "projects/" + projectId})
+        .then(response => response as Response<{}>);
+}
