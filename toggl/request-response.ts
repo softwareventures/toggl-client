@@ -1,5 +1,6 @@
 import {resolve} from "url";
 import {Client} from "../index";
+import {Authorization} from "./authentication";
 
 /** @internal */
 export interface Request<T> {
@@ -30,13 +31,19 @@ export interface UnauthenticatedResponse {
 }
 
 /** @internal */
-export function request(client: Client, request: Request<unknown>): Promise<Response<unknown>> {
+export interface ClientWithAuthorization extends Client {
+    readonly authorization: Authorization;
+}
+
+/** @internal */
+export function request(client: Client | ClientWithAuthorization, request: Request<unknown>): Promise<Response<unknown>> {
     const body = request.method === "POST"
         ? JSON.stringify(request.body)
         : void 0;
 
     return client.fetch(resolve(client.mainEndpoint + "/", request.path), {
         method: request.method,
+        headers: authorizationHeaders(client),
         body,
         mode: "cors",
         redirect: "follow"
@@ -68,4 +75,29 @@ export function request(client: Client, request: Request<unknown>): Promise<Resp
                     });
             }
         });
+}
+
+/** @internal */
+export function mapResponse<T, U>(f: (data: T) => U): (response: Response<T>) => Response<U> {
+    return response => {
+        if ("data" in response) {
+            return {...response, data: f(response.data)};
+        } else {
+            return response;
+        }
+    }
+}
+
+function authorizationHeaders(client: Client | ClientWithAuthorization): Record<string, string> {
+    if ("authorization" in client) {
+        const credentials = "apiToken" in client.authorization
+            ? client.authorization.apiToken + ":api_token"
+            : client.authorization.username + ":" + client.authorization.password;
+
+        return {
+            Authorization: "Basic " + btoa(credentials)
+        };
+    } else {
+        return {};
+    }
 }

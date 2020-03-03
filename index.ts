@@ -1,4 +1,5 @@
 import {resolve} from "url";
+export * from "./toggl/authentication";
 export * from "./toggl/request-response";
 
 export interface Client {
