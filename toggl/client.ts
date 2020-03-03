@@ -23,7 +23,7 @@ export interface ClientBase {
 }
 
 export function createClient(apiClient: AuthenticatedApiClient, client: CreateClientOptions): Promise<Response<Client>> {
-    return request(apiClient, {method: "POST", path: "clients", body: client})
+    return request(apiClient, {method: "POST", path: "clients", body: {client}})
         .then(response => response as Response<Client>);
 }
 
@@ -33,7 +33,7 @@ export function getClient(apiClient: AuthenticatedApiClient, clientId: number): 
 }
 
 export function updateClient(apiClient: AuthenticatedApiClient, client: UpdateClientOptions): Promise<Response<Client>> {
-    return request(apiClient, {method: "PUT", path: "clients/" + client.id})
+    return request(apiClient, {method: "PUT", path: "clients/" + client.id, body: {client}})
         .then(response => response as Response<Client>);
 }
 

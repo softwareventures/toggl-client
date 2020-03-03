@@ -52,7 +52,7 @@ export interface ProjectBase {
 }
 
 export function createProject(client: AuthenticatedApiClient, project: CreateProjectOptions): Promise<Response<Project>> {
-    return request(client, {method: "POST", path: "projects", body: project})
+    return request(client, {method: "POST", path: "projects", body: {project}})
         .then(response => response as Response<Project>);
 }
 
@@ -62,6 +62,6 @@ export function getProject(client: AuthenticatedApiClient, projectId: number): P
 }
 
 export function updateProject(client: AuthenticatedApiClient, project: UpdateProjectOptions): Promise<Response<Project>> {
-    return request(client, {method: "PUT", path: "projects/" + project.id, body: project})
+    return request(client, {method: "PUT", path: "projects/" + project.id, body: {project}})
         .then(response => response as Response<Project>);
 }
