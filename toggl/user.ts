@@ -41,7 +41,7 @@ export interface User {
     readonly timezone: string;
 }
 
-export function getCurrentUser(client: AuthenticatedApiClient): Promise<Response<User>> {
+export async function getCurrentUser(client: AuthenticatedApiClient): Promise<Response<User>> {
     return request(client, {method: "GET", path: "me"})
         .then(response => response as Response<User>);
 }

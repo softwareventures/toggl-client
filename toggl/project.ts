@@ -51,27 +51,30 @@ export interface ProjectBase {
     readonly rate?: number;
 }
 
-export function createProject(client: AuthenticatedApiClient, project: CreateProjectOptions): Promise<Response<Project>> {
+export async function createProject(client: AuthenticatedApiClient,
+                                    project: CreateProjectOptions): Promise<Response<Project>> {
     return request(client, {method: "POST", path: "projects", body: {project}})
         .then(response => response as Response<Project>);
 }
 
-export function getProject(client: AuthenticatedApiClient, projectId: number): Promise<Response<Project>> {
+export async function getProject(client: AuthenticatedApiClient, projectId: number): Promise<Response<Project>> {
     return request(client, {method: "GET", path: "projects/" + projectId})
         .then(response => response as Response<Project>);
 }
 
-export function updateProject(client: AuthenticatedApiClient, project: UpdateProjectOptions): Promise<Response<Project>> {
+export async function updateProject(client: AuthenticatedApiClient,
+                                    project: UpdateProjectOptions): Promise<Response<Project>> {
     return request(client, {method: "PUT", path: "projects/" + project.id, body: {project}})
         .then(response => response as Response<Project>);
 }
 
-export function deleteProject(client: AuthenticatedApiClient, projectId: number): Promise<Response<{}>> {
+export async function deleteProject(client: AuthenticatedApiClient, projectId: number): Promise<Response<{}>> {
     return request(client, {method: "DELETE", path: "projects/" + projectId})
         .then(response => response as Response<{}>);
 }
 
-export function deleteProjects(client: AuthenticatedApiClient, projectIds: ReadonlyArray<number>): Promise<Response<{}>> {
+export async function deleteProjects(client: AuthenticatedApiClient,
+                                     projectIds: ReadonlyArray<number>): Promise<Response<{}>> {
     return request(client, {method: "DELETE", path: "projects/" + projectIds.join(",")})
         .then(response => response as Response<{}>);
 }

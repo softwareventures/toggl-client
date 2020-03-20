@@ -36,7 +36,8 @@ export interface ApiClientWithAuthorization extends ApiClient {
 }
 
 /** @internal */
-export function request(client: ApiClient | ApiClientWithAuthorization, request: Request<unknown>): Promise<Response<unknown>> {
+export async function request(client: ApiClient | ApiClientWithAuthorization,
+                              request: Request<unknown>): Promise<Response<unknown>> {
     const body = request.method === "POST"
         ? JSON.stringify(request.body)
         : void 0;
@@ -85,7 +86,7 @@ export function mapResponse<T, U>(f: (data: T) => U): (response: Response<T>) =>
         } else {
             return response;
         }
-    }
+    };
 }
 
 function authorizationHeaders(client: ApiClient | ApiClientWithAuthorization): Record<string, string> {

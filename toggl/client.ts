@@ -22,27 +22,29 @@ export interface ClientBase {
     readonly notes?: string;
 }
 
-export function createClient(apiClient: AuthenticatedApiClient, client: CreateClientOptions): Promise<Response<Client>> {
+export async function createClient(apiClient: AuthenticatedApiClient,
+                                   client: CreateClientOptions): Promise<Response<Client>> {
     return request(apiClient, {method: "POST", path: "clients", body: {client}})
         .then(response => response as Response<Client>);
 }
 
-export function getClient(apiClient: AuthenticatedApiClient, clientId: number): Promise<Response<Client>> {
+export async function getClient(apiClient: AuthenticatedApiClient, clientId: number): Promise<Response<Client>> {
     return request(apiClient, {method: "GET", path: "clients/" + clientId})
         .then(response => response as Response<Client>);
 }
 
-export function updateClient(apiClient: AuthenticatedApiClient, client: UpdateClientOptions): Promise<Response<Client>> {
+export async function updateClient(apiClient: AuthenticatedApiClient,
+                                   client: UpdateClientOptions): Promise<Response<Client>> {
     return request(apiClient, {method: "PUT", path: "clients/" + client.id, body: {client}})
         .then(response => response as Response<Client>);
 }
 
-export function deleteClient(apiClient: AuthenticatedApiClient, clientId: number): Promise<Response<{}>> {
+export async function deleteClient(apiClient: AuthenticatedApiClient, clientId: number): Promise<Response<{}>> {
     return request(apiClient, {method: "DELETE", path: "clients/" + clientId})
         .then(response => response as Response<{}>);
 }
 
-export function getClients(apiClient: AuthenticatedApiClient): Promise<Response<ReadonlyArray<Client>>> {
+export async function getClients(apiClient: AuthenticatedApiClient): Promise<Response<ReadonlyArray<Client>>> {
     return request(apiClient, {method: "GET", path: "clients"})
         .then(response => response as Response<ReadonlyArray<Client>>);
 }
