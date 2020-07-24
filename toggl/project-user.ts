@@ -33,6 +33,6 @@ export async function getProjectUser(
 ): Promise<Response<ProjectUser>> {
     return request(client, {
         method: "GET",
-        path: "project_users" + projectUserId.toString(10)
+        path: "project_users/" + projectUserId.toString(10)
     }).then(response => response as Response<ProjectUser>);
 }
