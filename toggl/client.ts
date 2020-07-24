@@ -22,29 +22,48 @@ export interface ClientBase {
     readonly notes?: string;
 }
 
-export async function createClient(apiClient: AuthenticatedApiClient,
-                                   client: CreateClientOptions): Promise<Response<Client>> {
-    return request(apiClient, {method: "POST", path: "clients", body: {client}})
-        .then(response => response as Response<Client>);
+export async function createClient(
+    apiClient: AuthenticatedApiClient,
+    client: CreateClientOptions
+): Promise<Response<Client>> {
+    return request(apiClient, {method: "POST", path: "clients", body: {client}}).then(
+        response => response as Response<Client>
+    );
 }
 
-export async function getClient(apiClient: AuthenticatedApiClient, clientId: number): Promise<Response<Client>> {
-    return request(apiClient, {method: "GET", path: "clients/" + clientId})
-        .then(response => response as Response<Client>);
+export async function getClient(
+    apiClient: AuthenticatedApiClient,
+    clientId: number
+): Promise<Response<Client>> {
+    return request(apiClient, {method: "GET", path: "clients/" + clientId.toString(10)}).then(
+        response => response as Response<Client>
+    );
 }
 
-export async function updateClient(apiClient: AuthenticatedApiClient,
-                                   client: UpdateClientOptions): Promise<Response<Client>> {
-    return request(apiClient, {method: "PUT", path: "clients/" + client.id, body: {client}})
-        .then(response => response as Response<Client>);
+export async function updateClient(
+    apiClient: AuthenticatedApiClient,
+    client: UpdateClientOptions
+): Promise<Response<Client>> {
+    return request(apiClient, {
+        method: "PUT",
+        path: "clients/" + client.id.toString(10),
+        body: {client}
+    }).then(response => response as Response<Client>);
 }
 
-export async function deleteClient(apiClient: AuthenticatedApiClient, clientId: number): Promise<Response<{}>> {
-    return request(apiClient, {method: "DELETE", path: "clients/" + clientId})
-        .then(response => response as Response<{}>);
+export async function deleteClient(
+    apiClient: AuthenticatedApiClient,
+    clientId: number
+): Promise<Response<object>> {
+    return request(apiClient, {method: "DELETE", path: "clients/" + clientId.toString(10)}).then(
+        response => response as Response<object>
+    );
 }
 
-export async function getClients(apiClient: AuthenticatedApiClient): Promise<Response<ReadonlyArray<Client>>> {
-    return request(apiClient, {method: "GET", path: "clients"})
-        .then(response => response as Response<ReadonlyArray<Client>>);
+export async function getClients(
+    apiClient: AuthenticatedApiClient
+): Promise<Response<readonly Client[]>> {
+    return request(apiClient, {method: "GET", path: "clients"}).then(
+        response => response as Response<readonly Client[]>
+    );
 }

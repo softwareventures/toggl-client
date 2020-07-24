@@ -22,7 +22,7 @@ export interface SuccessResponse<T> {
 export interface ErrorResponse {
     readonly type: "ErrorResponse";
     readonly code: number;
-    readonly messages: ReadonlyArray<string>;
+    readonly messages: readonly string[];
 }
 
 export interface UnauthenticatedResponse {
@@ -36,44 +36,43 @@ export interface ApiClientWithAuthorization extends ApiClient {
 }
 
 /** @internal */
-export async function request(client: ApiClient | ApiClientWithAuthorization,
-                              request: Request<unknown>): Promise<Response<unknown>> {
-    const body = request.method === "POST"
-        ? JSON.stringify(request.body)
-        : void 0;
+export async function request(
+    client: ApiClient | ApiClientWithAuthorization,
+    request: Request<unknown>
+): Promise<Response<unknown>> {
+    const body = request.method === "POST" ? JSON.stringify(request.body) : undefined;
 
-    return client.fetch(resolve(client.mainEndpoint + "/", request.path), {
-        method: request.method,
-        headers: authorizationHeaders(client),
-        body,
-        mode: "cors",
-        redirect: "follow"
-    })
+    return client
+        .fetch(resolve(client.mainEndpoint + "/", request.path), {
+            method: request.method,
+            headers: authorizationHeaders(client),
+            body,
+            mode: "cors",
+            redirect: "follow"
+        })
         .then((response): Promise<Response<unknown>> | Response<unknown> => {
             if (response.ok) {
-                return response.json()
-                    .then((json: any) => {
-                        if ("data" in json) {
-                            return {type: "SuccessResponse", data: json.data};
-                        } else {
-                            throw new Error("Invalid response");
-                        }
-                    });
+                return response.json().then((json: any) => {
+                    if ("data" in json) {
+                        return {type: "SuccessResponse", data: json.data};
+                    } else {
+                        throw new Error("Invalid response");
+                    }
+                });
             } else if (response.status === 403) {
                 return {type: "UnauthenticatedResponse", code: 403};
             } else {
-                return response.json()
-                    .then((json: any) => {
-                        if (Array.isArray(json)) {
-                            return {
-                                type: "ErrorResponse",
-                                code: response.status,
-                                messages: json
-                            };
-                        } else {
-                            throw new Error("Invalid response");
-                        }
-                    });
+                return response.json().then((json: any) => {
+                    if (Array.isArray(json)) {
+                        return {
+                            type: "ErrorResponse",
+                            code: response.status,
+                            messages: json
+                        };
+                    } else {
+                        throw new Error("Invalid response");
+                    }
+                });
             }
         });
 }
@@ -89,11 +88,14 @@ export function mapResponse<T, U>(f: (data: T) => U): (response: Response<T>) =>
     };
 }
 
-function authorizationHeaders(client: ApiClient | ApiClientWithAuthorization): Record<string, string> {
+function authorizationHeaders(
+    client: ApiClient | ApiClientWithAuthorization
+): Record<string, string> {
     if ("authorization" in client) {
-        const credentials = "apiToken" in client.authorization
-            ? client.authorization.apiToken + ":api_token"
-            : client.authorization.username + ":" + client.authorization.password;
+        const credentials =
+            "apiToken" in client.authorization
+                ? client.authorization.apiToken + ":api_token"
+                : client.authorization.username + ":" + client.authorization.password;
 
         return {
             Authorization: "Basic " + btoa(credentials)

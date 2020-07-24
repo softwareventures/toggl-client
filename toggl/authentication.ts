@@ -22,11 +22,16 @@ export interface AuthenticatedApiClient extends ApiClient {
     readonly authorization: ApiToken;
 }
 
-export async function authenticate(client: ApiClient, authorization: Authorization): Promise<Response<Authentication>> {
+export async function authenticate(
+    client: ApiClient,
+    authorization: Authorization
+): Promise<Response<Authentication>> {
     return request({...client, authorization}, {method: "GET", path: "me"})
         .then(response => response as Response<User>)
-        .then(mapResponse(user => ({
-            client: {...client, authorization: {apiToken: user.api_token}},
-            user
-        })));
+        .then(
+            mapResponse(user => ({
+                client: {...client, authorization: {apiToken: user.api_token}},
+                user
+            }))
+        );
 }
