@@ -24,6 +24,7 @@
     "tslib": "2.0.0"
   },
   "devDependencies": {
+    "@softwareventures/semantic-release-config": "1.1.1",
     "@softwareventures/tsconfig": "2.2.0",
     "@softwareventures/tslint-rules": "0.9.1",
     "ava": "3.10.1",
@@ -45,5 +46,8 @@
     "require": [
       "ts-node/register"
     ]
+  },
+  "release": {
+    "extends": "@softwareventures/semantic-release-config"
   }
 }
