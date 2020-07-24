@@ -53,3 +53,13 @@ export async function updateProjectUser(
         body: {project_user: user}
     }).then(response => response as Response<ProjectUser>);
 }
+
+export async function deleteProjectUser(
+    client: AuthenticatedApiClient,
+    projectUserId: number
+): Promise<Response<object>> {
+    return request(client, {
+        method: "DELETE",
+        path: "project_users/" + projectUserId.toString(10)
+    }).then(response => response as Response<object>);
+}
