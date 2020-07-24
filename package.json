@@ -10,9 +10,9 @@
     "TypeScript"
   ],
   "author": "Daniel Cassidy <mail@danielcassidy.me.uk>",
-  "homepage": "https://github.com/softwareventures/toggl",
-  "bugs": "https://github.com/softwareventures/toggl",
-  "repository": "github:softwareventures/toggl",
+  "homepage": "https://github.com/softwareventures/toggl-client",
+  "bugs": "https://github.com/softwareventures/toggl-client",
+  "repository": "github:softwareventures/toggl-client",
   "license": "ISC",
   "scripts": {
     "fix": "eslint . --fix && prettier --write .",
