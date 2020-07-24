@@ -5,7 +5,6 @@ export interface ProjectUser extends CreateProjectUserOptions {
     readonly id: number;
     readonly wid: number;
     readonly manager: boolean;
-    readonly rate?: number;
     readonly at: string;
 }
 
@@ -14,6 +13,7 @@ export interface CreateProjectUserOptions {
     readonly uid: number;
     readonly wid?: number;
     readonly manager?: boolean;
+    readonly rate?: number;
 }
 
 export async function createProjectUser(
