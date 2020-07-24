@@ -26,3 +26,13 @@ export async function createProjectUser(
         body: {project_user: user}
     }).then(response => response as Response<ProjectUser>);
 }
+
+export async function getProjectUser(
+    client: AuthenticatedApiClient,
+    projectUserId: number
+): Promise<Response<ProjectUser>> {
+    return request(client, {
+        method: "GET",
+        path: "project_users" + projectUserId.toString(10)
+    }).then(response => response as Response<ProjectUser>);
+}
