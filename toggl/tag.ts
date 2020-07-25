@@ -36,3 +36,13 @@ export async function updateTag(
         body: {tag: {name: tag.name}}
     }).then(response => response as Response<Tag>);
 }
+
+export async function deleteTag(
+    client: AuthenticatedApiClient,
+    tagId: number
+): Promise<Response<object>> {
+    return request(client, {
+        method: "DELETE",
+        path: "tags/" + tagId.toString(10)
+    }).then(response => response as Response<object>);
+}
