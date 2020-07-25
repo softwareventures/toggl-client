@@ -1,6 +1,11 @@
 import {AuthenticatedApiClient} from "./authentication";
 import {request, Response} from "./request-response";
 
+/**
+ * @file Time Entries
+ * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md
+ */
+
 export interface TimeEntry extends UpdateTimeEntryOptions {
     /** ID of the Workspace that this TimeEntry belongs to. */
     readonly wid: number;
