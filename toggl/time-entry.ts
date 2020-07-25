@@ -87,3 +87,13 @@ export async function stopTimeEntry(
         path: "time_entries/" + id.toString(10) + "/stop"
     }).then(response => response as Response<TimeEntry>);
 }
+
+export async function getTimeEntry(
+    client: AuthenticatedApiClient,
+    id: number
+): Promise<Response<TimeEntry>> {
+    return request(client, {
+        method: "GET",
+        path: "time_entries/" + id.toString(10)
+    }).then(response => response as Response<TimeEntry>);
+}
