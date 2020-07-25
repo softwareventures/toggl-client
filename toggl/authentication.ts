@@ -2,6 +2,11 @@ import {ApiClient, mapResponse} from "../index";
 import {request, Response} from "./request-response";
 import {User} from "./user";
 
+/**
+ * @file Authentication
+ * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/authentication.md
+ */
+
 export type Authorization = UsernamePassword | ApiToken;
 
 export interface UsernamePassword {
