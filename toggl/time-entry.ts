@@ -167,7 +167,7 @@ export async function getTimeEntriesInRange(
     }).then(response => response as Response<TimeEntry[]>);
 }
 
-export async function replaceTimeEntriesTags(
+export async function replaceTagsOfTimeEntries(
     client: AuthenticatedApiClient,
     options: TimeEntriesTagsOptions
 ): Promise<Response<TimeEntry[]>> {
