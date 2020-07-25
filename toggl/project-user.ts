@@ -1,6 +1,11 @@
 import {AuthenticatedApiClient} from "./authentication";
 import {request, Response} from "./request-response";
 
+/**
+ * @file Project Users
+ * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/project_users.md
+ */
+
 export interface ProjectUser extends CreateProjectUserOptions, UpdateProjectUserOptions {
     /** ID of the Workspace that the project belongs to. */
     readonly wid: number;
