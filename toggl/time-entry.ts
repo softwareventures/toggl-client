@@ -146,3 +146,16 @@ export async function deleteTimeEntry(
         path: `time_entries/${id}`
     }).then(response => response as Response<object>);
 }
+
+export async function getTimeEntriesInRange(
+    client: AuthenticatedApiClient,
+    start: string,
+    end: string
+): Promise<Response<TimeEntry[]>> {
+    return request(client, {
+        method: "GET",
+        path: `time_entries?start_date=${encodeURIComponent(start)}&end_date=${encodeURIComponent(
+            end
+        )}`
+    }).then(response => response as Response<TimeEntry[]>);
+}
