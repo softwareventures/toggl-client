@@ -52,8 +52,48 @@ export interface User {
     readonly timezone: string;
 }
 
+export interface UpdateUserOptions {
+    readonly fullname?: string;
+    readonly email?: string;
+    /** Toggl can send newsletters over e-mail to the User. */
+    readonly send_product_emails?: boolean;
+    /** If User receives weekly report. */
+    readonly send_weekly_report?: boolean;
+    /** E-mail User about long-running (more than 8 hours) tasks. */
+    readonly send_timer_notifications?: boolean;
+    /** Whether start and stop time are saved on time entry. */
+    readonly store_start_and_stop_time?: boolean;
+    /** The first day of the week for this User, 0-6, Sunday=0. */
+    readonly beginning_of_week?: number;
+    /** IANA TZ timezone specifying the User's timezone. */
+    readonly timezone?: string;
+    readonly timeofday_format?: "H:mm" | "h:mm A";
+    readonly date_format?:
+        | "YYYY-MM-DD"
+        | "DD.MM.YYYY"
+        | "DD-MM-YYYY"
+        | "MM/DD/YYYY"
+        | "DD/MM/YYYY"
+        | "MM-DD-YYYY";
+    /** The User's current password. Must be set if `password` is also
+     * set. */
+    readonly current_password?: string;
+    /** The User's new password. If this is set then `current_password`
+     * must also be set. */
+    readonly password?: string;
+}
+
 export async function getCurrentUser(client: AuthenticatedApiClient): Promise<Response<User>> {
     return request(client, {method: "GET", path: "me"}).then(
+        response => response as Response<User>
+    );
+}
+
+export async function updateCurrentUser(
+    client: AuthenticatedApiClient,
+    user: UpdateUserOptions
+): Promise<Response<User>> {
+    return request(client, {method: "PUT", path: "me", body: {user}}).then(
         response => response as Response<User>
     );
 }
