@@ -13,7 +13,10 @@ export interface CreateTagOptions {
     readonly wid: number;
 }
 
-export async function createTag(client: AuthenticatedApiClient, tag: Tag): Promise<Response<Tag>> {
+export async function createTag(
+    client: AuthenticatedApiClient,
+    tag: CreateTagOptions
+): Promise<Response<Tag>> {
     return request(client, {
         method: "POST",
         path: "tags",
