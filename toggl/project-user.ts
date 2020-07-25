@@ -17,7 +17,6 @@ export interface CreateProjectUsersOptions extends CreateProjectUserBaseOptions 
 
 export interface CreateProjectUserBaseOptions extends ProjectUserBase {
     readonly pid: number;
-    readonly wid?: number;
 }
 
 export interface UpdateProjectUserOptions extends ProjectUserBase {
@@ -96,7 +95,6 @@ export async function createProjectUsers(
             project_user: {
                 uid: options.uids.join(","),
                 pid: options.pid,
-                wid: options.wid,
                 manager: options.manager,
                 rate: options.rate
             }
