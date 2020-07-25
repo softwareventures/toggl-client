@@ -2,6 +2,11 @@ import {resolve} from "url";
 import {ApiClient} from "../index";
 import {Authorization} from "./authentication";
 
+/**
+ * @file Common Toggl API Client components
+ * @see https://github.com/toggl/toggl_api_docs/blob/master/toggl_api.md
+ */
+
 /** @internal */
 export interface Request<T> {
     readonly method: Method;
