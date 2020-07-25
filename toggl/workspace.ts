@@ -1,0 +1,59 @@
+import {AuthenticatedApiClient} from "./authentication";
+import {request, Response} from "./request-response";
+
+/**
+ * @file Workspaces
+ * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md
+ */
+
+export enum RoundingType {
+    Down = -1,
+    Nearest = 0,
+    Up = 1
+}
+
+export interface Workspace {
+    /** The name of the Workspace. */
+    readonly name: string;
+    /** True if this is a premium (paid) Workspace. */
+    readonly premium: boolean;
+    /** True if the current User has admin access to the Workspace. */
+    readonly admin: boolean;
+    /** Default hourly rate for the Workspace.
+     *
+     * Hidden for non-admins if `only_admins_see_billable_rates` is true. */
+    readonly default_hourly_rate?: number;
+    /** Default currency for Workspace. */
+    readonly default_currency: string;
+    /** True if only admins can create Projects within this Workspace. */
+    readonly only_admins_may_create_projects: boolean;
+    /** True if only admins can see billable rates within this Workspace. */
+    readonly only_admins_see_billable_rates: boolean;
+    /** Type of rounding. */
+    readonly rounding: RoundingType;
+    /** Number of minutes to round to. */
+    readonly rounding_minutes?: number;
+    /** ISO 8601 date and time indicating when the Workspace was last updated. */
+    readonly at: string;
+    /** URL of the logo of this Workspace. */
+    readonly logo_url?: string;
+}
+
+export async function getWorkspaces(
+    client: AuthenticatedApiClient
+): Promise<Response<Workspace[]>> {
+    return request(client, {
+        method: "GET",
+        path: "workspaces"
+    }).then(response => response as Response<Workspace[]>);
+}
+
+export async function getWorkspace(
+    client: AuthenticatedApiClient,
+    id: number
+): Promise<Response<Workspace>> {
+    return request(client, {
+        method: "GET",
+        path: `workspaces/${id}`
+    }).then(response => response as Response<Workspace>);
+}
