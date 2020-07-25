@@ -63,3 +63,13 @@ export async function deleteProjectUser(
         path: "project_users/" + projectUserId.toString(10)
     }).then(response => response as Response<object>);
 }
+
+export async function getProjectUsers(
+    client: AuthenticatedApiClient,
+    workspaceId: number
+): Promise<Response<ProjectUser[]>> {
+    return request(client, {
+        method: "GET",
+        path: "workspaces/" + workspaceId.toString(10) + "/project_users"
+    }).then(response => response as Response<ProjectUser[]>);
+}
