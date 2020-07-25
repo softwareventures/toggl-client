@@ -22,8 +22,8 @@ export interface User {
     readonly image_url: string;
     /** Should a pie chart be shown on the sidebar. */
     readonly sidebar_piechart: boolean;
-    /** Unix timestamp of last changes (seconds since 1 January 1970). */
-    readonly at: number;
+    /** When the user was last updated, as an ISO 8601 date and time. */
+    readonly at: string;
     readonly new_blog_post?: {
         readonly title: string;
         readonly url: string;
