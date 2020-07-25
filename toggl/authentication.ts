@@ -40,3 +40,11 @@ export async function authenticate(
             }))
         );
 }
+
+export async function resetApiToken(
+    client: AuthenticatedApiClient
+): Promise<Response<AuthenticatedApiClient>> {
+    return request(client, {method: "POST", path: "reset_token"})
+        .then(response => response as Response<string>)
+        .then(mapResponse(apiToken => ({...client, authorization: {apiToken}})));
+}
