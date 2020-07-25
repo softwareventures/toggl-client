@@ -61,6 +61,13 @@ export interface StartTimeEntryOptions {
     readonly duronly?: boolean;
 }
 
+export interface TimeEntriesTagsOptions {
+    /** Time Entry IDs. */
+    readonly ids: readonly number[];
+    /** A list of Tag names. */
+    readonly tags: readonly string[];
+}
+
 export async function createTimeEntry(
     client: AuthenticatedApiClient,
     timeEntry: CreateTimeEntryOptions
@@ -157,5 +164,16 @@ export async function getTimeEntriesInRange(
         path: `time_entries?start_date=${encodeURIComponent(start)}&end_date=${encodeURIComponent(
             end
         )}`
+    }).then(response => response as Response<TimeEntry[]>);
+}
+
+export async function replaceTimeEntriesTags(
+    client: AuthenticatedApiClient,
+    options: TimeEntriesTagsOptions
+): Promise<Response<TimeEntry[]>> {
+    return request(client, {
+        method: "PUT",
+        path: `time_entries/${options.ids.join(",")}`,
+        body: {time_entry: {tags: options.tags}}
     }).then(response => response as Response<TimeEntry[]>);
 }
