@@ -77,3 +77,13 @@ export async function startTimeEntry(
         body: {time_entry: options}
     }).then(response => response as Response<TimeEntry>);
 }
+
+export async function stopTimeEntry(
+    client: AuthenticatedApiClient,
+    id: number
+): Promise<Response<TimeEntry>> {
+    return request(client, {
+        method: "PUT",
+        path: "time_entries/" + id.toString(10) + "/stop"
+    }).then(response => response as Response<TimeEntry>);
+}
