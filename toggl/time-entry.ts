@@ -136,3 +136,13 @@ export async function updateTimeEntry(
         }
     }).then(response => response as Response<TimeEntry>);
 }
+
+export async function deleteTimeEntry(
+    client: AuthenticatedApiClient,
+    id: number
+): Promise<Response<object>> {
+    return request(client, {
+        method: "DELETE",
+        path: `time_entries/${id}`
+    }).then(response => response as Response<object>);
+}
