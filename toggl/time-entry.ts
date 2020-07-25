@@ -177,3 +177,14 @@ export async function replaceTagsOfTimeEntries(
         body: {time_entry: {tags: options.tags}}
     }).then(response => response as Response<TimeEntry[]>);
 }
+
+export async function addTagsToTimeEntries(
+    client: AuthenticatedApiClient,
+    options: TimeEntriesTagsOptions
+): Promise<Response<TimeEntry[]>> {
+    return request(client, {
+        method: "PUT",
+        path: `time_entries/${options.ids.join(",")}`,
+        body: {time_entry: {tag_action: "add", tags: options.tags}}
+    }).then(response => response as Response<TimeEntry[]>);
+}
