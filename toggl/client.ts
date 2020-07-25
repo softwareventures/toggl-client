@@ -1,6 +1,11 @@
 import {AuthenticatedApiClient} from "./authentication";
 import {request, Response} from "./request-response";
 
+/**
+ * @file Clients
+ * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md
+ */
+
 export interface Client extends CreateClientOptions, UpdateClientOptions {
     /** Timestamp indicating when the client was last updated. */
     readonly at: string;
