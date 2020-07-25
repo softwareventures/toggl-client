@@ -24,6 +24,10 @@ export interface UpdateProjectUserOptions extends ProjectUserBase {
     readonly id: number;
 }
 
+export interface UpdateProjectUsersOptions extends ProjectUserBase {
+    readonly ids: readonly number[];
+}
+
 export interface ProjectUserBase {
     readonly manager?: boolean;
     readonly rate?: number;
@@ -97,5 +101,16 @@ export async function createProjectUsers(
                 rate: options.rate
             }
         }
+    }).then(response => response as Response<ProjectUser[]>);
+}
+
+export async function updateProjectUsers(
+    client: AuthenticatedApiClient,
+    options: UpdateProjectUsersOptions
+): Promise<Response<ProjectUser[]>> {
+    return request(client, {
+        method: "PUT",
+        path: "project_users/" + options.ids.join(","),
+        body: {project_user: {manager: options.manager, rate: options.rate}}
     }).then(response => response as Response<ProjectUser[]>);
 }
