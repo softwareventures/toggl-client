@@ -24,7 +24,18 @@ export interface TimeEntry extends CreateTimeEntryOptions {
     readonly at: string;
 }
 
-export interface CreateTimeEntryOptions {
+export interface CreateTimeEntryOptions extends StartTimeEntryOptions {
+    /** The start time, as an ISO 8601 date and time. */
+    readonly start: string;
+    /** The end time, as an ISO 8601 date and time, or undefined if the
+     * TimeEntry is running. */
+    readonly stop?: string;
+    /** If the TimeEntry is stopped, a positive value specifying the
+     * duration of the TimeEntry in seconds. */
+    readonly duration?: number;
+}
+
+export interface StartTimeEntryOptions {
     /** Description of work done during this TimeEntry. */
     readonly description: string;
     /** ID of the Workspace that this TimeEntry belongs to.
@@ -36,14 +47,6 @@ export interface CreateTimeEntryOptions {
     readonly tid?: number;
     /** True if this TimeEntry is billable. */
     readonly billable?: boolean;
-    /** The start time, as an ISO 8601 date and time. */
-    readonly start: string;
-    /** The end time, as an ISO 8601 date and time, or undefined if the
-     * TimeEntry is running. */
-    readonly stop?: string;
-    /** If the TimeEntry is stopped, a positive value specifying the
-     * duration of the TimeEntry in seconds. */
-    readonly duration?: number;
     /** The name of the client app that created this TimeEntry. */
     readonly created_with: string;
     /** A list of Tag names associated with this TimeEntry. */
@@ -61,5 +64,16 @@ export async function createTimeEntry(
         method: "POST",
         path: "time_entries",
         body: {time_entry: timeEntry}
+    }).then(response => response as Response<TimeEntry>);
+}
+
+export async function startTimeEntry(
+    client: AuthenticatedApiClient,
+    options: StartTimeEntryOptions
+): Promise<Response<TimeEntry>> {
+    return request(client, {
+        method: "POST",
+        path: "time_entries/start",
+        body: {time_entry: options}
     }).then(response => response as Response<TimeEntry>);
 }
