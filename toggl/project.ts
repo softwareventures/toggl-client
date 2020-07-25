@@ -64,7 +64,7 @@ export async function getProject(
     client: AuthenticatedApiClient,
     projectId: number
 ): Promise<Response<Project>> {
-    return request(client, {method: "GET", path: "projects/" + projectId.toString(10)}).then(
+    return request(client, {method: "GET", path: `projects/${projectId}`}).then(
         response => response as Response<Project>
     );
 }
@@ -75,7 +75,7 @@ export async function updateProject(
 ): Promise<Response<Project>> {
     return request(client, {
         method: "PUT",
-        path: "projects/" + project.id.toString(10),
+        path: `projects/${project.id}`,
         body: {project}
     }).then(response => response as Response<Project>);
 }
@@ -84,7 +84,7 @@ export async function deleteProject(
     client: AuthenticatedApiClient,
     projectId: number
 ): Promise<Response<object>> {
-    return request(client, {method: "DELETE", path: "projects/" + projectId.toString(10)}).then(
+    return request(client, {method: "DELETE", path: `projects/${projectId}`}).then(
         response => response as Response<object>
     );
 }

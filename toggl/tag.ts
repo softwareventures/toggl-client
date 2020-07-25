@@ -32,7 +32,7 @@ export async function updateTag(
 ): Promise<Response<Tag>> {
     return request(client, {
         method: "PUT",
-        path: "tags/" + tag.id.toString(10),
+        path: `tags/${tag.id}`,
         body: {tag: {name: tag.name}}
     }).then(response => response as Response<Tag>);
 }
@@ -43,6 +43,6 @@ export async function deleteTag(
 ): Promise<Response<object>> {
     return request(client, {
         method: "DELETE",
-        path: "tags/" + tagId.toString(10)
+        path: `tags/${tagId}`
     }).then(response => response as Response<object>);
 }

@@ -35,7 +35,7 @@ export async function getClient(
     apiClient: AuthenticatedApiClient,
     clientId: number
 ): Promise<Response<Client>> {
-    return request(apiClient, {method: "GET", path: "clients/" + clientId.toString(10)}).then(
+    return request(apiClient, {method: "GET", path: `clients/${clientId}`}).then(
         response => response as Response<Client>
     );
 }
@@ -46,7 +46,7 @@ export async function updateClient(
 ): Promise<Response<Client>> {
     return request(apiClient, {
         method: "PUT",
-        path: "clients/" + client.id.toString(10),
+        path: `clients/${client.id}`,
         body: {client}
     }).then(response => response as Response<Client>);
 }
@@ -55,7 +55,7 @@ export async function deleteClient(
     apiClient: AuthenticatedApiClient,
     clientId: number
 ): Promise<Response<object>> {
-    return request(apiClient, {method: "DELETE", path: "clients/" + clientId.toString(10)}).then(
+    return request(apiClient, {method: "DELETE", path: `clients/${clientId}`}).then(
         response => response as Response<object>
     );
 }

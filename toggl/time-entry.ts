@@ -89,7 +89,7 @@ export async function stopTimeEntry(
 ): Promise<Response<TimeEntry>> {
     return request(client, {
         method: "PUT",
-        path: "time_entries/" + id.toString(10) + "/stop"
+        path: `time_entries/${id}/stop`
     }).then(response => response as Response<TimeEntry>);
 }
 
@@ -99,7 +99,7 @@ export async function getTimeEntry(
 ): Promise<Response<TimeEntry>> {
     return request(client, {
         method: "GET",
-        path: "time_entries/" + id.toString(10)
+        path: `time_entries/${id}`
     }).then(response => response as Response<TimeEntry>);
 }
 
@@ -118,7 +118,7 @@ export async function updateTimeEntry(
 ): Promise<Response<TimeEntry>> {
     return request(client, {
         method: "PUT",
-        path: "time_entries/" + options.id.toString(10),
+        path: `time_entries/${options.id}`,
         body: {
             time_entry: {
                 description: options.description,

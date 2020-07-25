@@ -60,7 +60,7 @@ export async function getProjectUser(
 ): Promise<Response<ProjectUser>> {
     return request(client, {
         method: "GET",
-        path: "project_users/" + projectUserId.toString(10)
+        path: `project_users/${projectUserId}`
     }).then(response => response as Response<ProjectUser>);
 }
 
@@ -70,7 +70,7 @@ export async function updateProjectUser(
 ): Promise<Response<ProjectUser>> {
     return request(client, {
         method: "PUT",
-        path: "project_users/" + user.id.toString(10),
+        path: `project_users/${user.id}`,
         body: {project_user: user}
     }).then(response => response as Response<ProjectUser>);
 }
@@ -81,7 +81,7 @@ export async function deleteProjectUser(
 ): Promise<Response<object>> {
     return request(client, {
         method: "DELETE",
-        path: "project_users/" + projectUserId.toString(10)
+        path: `project_users/${projectUserId}`
     }).then(response => response as Response<object>);
 }
 
@@ -91,7 +91,7 @@ export async function getProjectUsers(
 ): Promise<Response<ProjectUser[]>> {
     return request(client, {
         method: "GET",
-        path: "workspaces/" + workspaceId.toString(10) + "/project_users"
+        path: `workspaces/${workspaceId}/project_users`
     }).then(response => response as Response<ProjectUser[]>);
 }
 
