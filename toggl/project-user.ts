@@ -114,3 +114,13 @@ export async function updateProjectUsers(
         body: {project_user: {manager: options.manager, rate: options.rate}}
     }).then(response => response as Response<ProjectUser[]>);
 }
+
+export async function deleteProjectUsers(
+    client: AuthenticatedApiClient,
+    ids: readonly number[]
+): Promise<Response<object>> {
+    return request(client, {
+        method: "DELETE",
+        path: "project_users/" + ids.join(",")
+    }).then(response => response as Response<object>);
+}
