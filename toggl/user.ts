@@ -2,8 +2,7 @@ import {AuthenticatedApiClient} from "../index";
 import {request, Response} from "./request-response";
 
 /**
- * @file Authentication and user data
- * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/authentication.md
+ * @file Users
  * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/users.md
  */
 
