@@ -188,3 +188,14 @@ export async function addTagsToTimeEntries(
         body: {time_entry: {tag_action: "add", tags: options.tags}}
     }).then(response => response as Response<TimeEntry[]>);
 }
+
+export async function removeTagsFromTimeEntries(
+    client: AuthenticatedApiClient,
+    options: TimeEntriesTagsOptions
+): Promise<Response<TimeEntry[]>> {
+    return request(client, {
+        method: "PUT",
+        path: `time_entries/${options.ids.join(",")}`,
+        body: {time_entry: {tag_action: "remove", tags: options.tags}}
+    }).then(response => response as Response<TimeEntry[]>);
+}
