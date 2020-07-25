@@ -1,6 +1,11 @@
 import {AuthenticatedApiClient} from "./authentication";
 import {request, Response} from "./request-response";
 
+/**
+ * @file Tags
+ * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/tags.md
+ */
+
 export interface Tag extends CreateTagOptions, UpdateTagOptions {}
 
 export interface CreateTagOptions extends UpdateTagOptions {
