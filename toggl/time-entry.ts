@@ -1,7 +1,7 @@
 import {AuthenticatedApiClient} from "./authentication";
 import {request, Response} from "./request-response";
 
-export interface TimeEntry extends CreateTimeEntryOptions {
+export interface TimeEntry extends UpdateTimeEntryOptions {
     /** ID of the Workspace that this TimeEntry belongs to. */
     readonly wid: number;
     /** True if this TimeEntry is billable. */
@@ -22,6 +22,11 @@ export interface TimeEntry extends CreateTimeEntryOptions {
     readonly duronly: boolean;
     /** Timestamp indicating when the TimeEntry was last updated. */
     readonly at: string;
+}
+
+export interface UpdateTimeEntryOptions extends CreateTimeEntryOptions {
+    /** Time Entry ID. */
+    readonly id: number;
 }
 
 export interface CreateTimeEntryOptions extends StartTimeEntryOptions {
@@ -104,5 +109,30 @@ export async function getRunningTimeEntry(
     return request(client, {
         method: "GET",
         path: "time_entries/current"
+    }).then(response => response as Response<TimeEntry>);
+}
+
+export async function updateTimeEntry(
+    client: AuthenticatedApiClient,
+    options: UpdateTimeEntryOptions
+): Promise<Response<TimeEntry>> {
+    return request(client, {
+        method: "PUT",
+        path: "time_entries/" + options.id.toString(10),
+        body: {
+            time_entry: {
+                description: options.description,
+                wid: options.wid,
+                pid: options.pid,
+                tid: options.tid,
+                billable: options.billable,
+                start: options.start,
+                stop: options.stop,
+                duration: options.duration,
+                created_with: options.created_with,
+                tags: options.tags,
+                duronly: options.duronly
+            }
+        }
     }).then(response => response as Response<TimeEntry>);
 }
