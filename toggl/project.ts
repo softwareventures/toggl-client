@@ -1,6 +1,11 @@
 import {AuthenticatedApiClient} from "./authentication";
 import {request, Response} from "./request-response";
 
+/**
+ * @file Projects
+ * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md
+ */
+
 export interface Project extends UpdateProjectOptions {
     /** False if the Project is archived. */
     readonly active: boolean;
