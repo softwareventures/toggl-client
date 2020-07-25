@@ -161,9 +161,9 @@ export async function getTimeEntriesInRange(
 ): Promise<Response<TimeEntry[]>> {
     return request(client, {
         method: "GET",
-        path: `time_entries?start_date=${encodeURIComponent(start)}&end_date=${encodeURIComponent(
-            end
-        )}`
+        path:
+            `time_entries?start_date=${encodeURIComponent(start)}` +
+            `&end_date=${encodeURIComponent(end)}`
     }).then(response => response as Response<TimeEntry[]>);
 }
 
