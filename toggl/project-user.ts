@@ -7,9 +7,16 @@ export interface ProjectUser extends CreateProjectUserOptions, UpdateProjectUser
     readonly at: string;
 }
 
-export interface CreateProjectUserOptions extends ProjectUserBase {
-    readonly pid: number;
+export interface CreateProjectUserOptions extends CreateProjectUserBaseOptions {
     readonly uid: number;
+}
+
+export interface CreateProjectUsersOptions extends CreateProjectUserBaseOptions {
+    readonly uids: readonly number[];
+}
+
+export interface CreateProjectUserBaseOptions extends ProjectUserBase {
+    readonly pid: number;
     readonly wid?: number;
 }
 
@@ -71,5 +78,24 @@ export async function getProjectUsers(
     return request(client, {
         method: "GET",
         path: "workspaces/" + workspaceId.toString(10) + "/project_users"
+    }).then(response => response as Response<ProjectUser[]>);
+}
+
+export async function createProjectUsers(
+    client: AuthenticatedApiClient,
+    options: CreateProjectUsersOptions
+): Promise<Response<ProjectUser[]>> {
+    return request(client, {
+        method: "POST",
+        path: "project_users",
+        body: {
+            project_user: {
+                uid: options.uids.join(","),
+                pid: options.pid,
+                wid: options.wid,
+                manager: options.manager,
+                rate: options.rate
+            }
+        }
     }).then(response => response as Response<ProjectUser[]>);
 }
