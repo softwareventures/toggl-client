@@ -1,5 +1,6 @@
 import {AuthenticatedApiClient} from "./authentication";
 import {request, Response} from "./request-response";
+import {User} from "./user";
 
 /**
  * @file Workspaces
@@ -92,4 +93,14 @@ export async function updateWorkspace(
             }
         }
     }).then(response => response as Response<Workspace>);
+}
+
+export async function getWorkspaceUsers(
+    client: AuthenticatedApiClient,
+    workspaceId: number
+): Promise<Response<User[]>> {
+    return request(client, {
+        method: "GET",
+        path: `workspaces/${workspaceId}/users`
+    }).then(response => response as Response<User[]>);
 }
