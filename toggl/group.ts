@@ -11,11 +11,19 @@ export interface Group extends CreateGroupOptions {
     readonly at: string;
 }
 
-export interface CreateGroupOptions {
-    /** The name of the Group. */
-    readonly name: string;
+export interface CreateGroupOptions extends GroupBase {
     /** ID of the Workspace to which the Group belongs. */
     readonly wid: number;
+}
+
+export interface UpdateGroupOptions extends GroupBase {
+    /** Group ID. */
+    readonly id: number;
+}
+
+export interface GroupBase {
+    /** The name of the Group. */
+    readonly name: string;
 }
 
 export async function createGroup(
@@ -26,5 +34,16 @@ export async function createGroup(
         method: "POST",
         path: "groups",
         body: {group: options}
+    }).then(response => response as Response<Group>);
+}
+
+export async function updateGroup(
+    client: AuthenticatedApiClient,
+    options: UpdateGroupOptions
+): Promise<Response<Group>> {
+    return request(client, {
+        method: "PUT",
+        path: `groups/${options.id}`,
+        body: {group: {name: options.name}}
     }).then(response => response as Response<Group>);
 }
