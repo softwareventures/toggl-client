@@ -1,6 +1,7 @@
 import {AuthenticatedApiClient} from "./authentication";
 import {Client} from "./client";
 import {Group} from "./group";
+import {Project} from "./project";
 import {request, Response} from "./request-response";
 import {User} from "./user";
 
@@ -125,4 +126,31 @@ export async function getWorkspaceGroups(
         method: "GET",
         path: `workspaces/${workspaceId}/groups`
     }).then(response => response as Response<Group[]>);
+}
+
+export interface GetWorkspaceProjectsOptions {
+    /** The Workspace ID. */
+    readonly workspaceId: number;
+    /** If true, only active projects are returned.
+     * If false, only archived (inactive) projects are returned.
+     *
+     * @default true */
+    readonly active: boolean | "both";
+    /** If true, only project templates are returned.
+     *
+     * @default false */
+    readonly only_templates: boolean;
+}
+
+export async function getWorkspaceProjects(
+    client: AuthenticatedApiClient,
+    options: GetWorkspaceProjectsOptions
+): Promise<Response<Project[]>> {
+    return request(client, {
+        method: "GET",
+        path:
+            `workspace/${options.workspaceId}/projects` +
+            `?active=${options.active ?? true}` +
+            `&only_templates=${options.only_templates ?? false}`
+    }).then(response => response as Response<Project[]>);
 }
