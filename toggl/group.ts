@@ -47,3 +47,13 @@ export async function updateGroup(
         body: {group: {name: options.name}}
     }).then(response => response as Response<Group>);
 }
+
+export async function deleteGroup(
+    client: AuthenticatedApiClient,
+    groupId: number
+): Promise<Response<object>> {
+    return request(client, {
+        method: "DELETE",
+        path: `groups/${groupId}`
+    }).then(response => response as Response<Group>);
+}
