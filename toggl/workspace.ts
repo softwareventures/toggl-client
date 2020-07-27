@@ -1,4 +1,5 @@
 import {AuthenticatedApiClient} from "./authentication";
+import {Client} from "./client";
 import {request, Response} from "./request-response";
 import {User} from "./user";
 
@@ -103,4 +104,14 @@ export async function getWorkspaceUsers(
         method: "GET",
         path: `workspaces/${workspaceId}/users`
     }).then(response => response as Response<User[]>);
+}
+
+export async function getWorkspaceClients(
+    client: AuthenticatedApiClient,
+    workspaceId: number
+): Promise<Response<Client[]>> {
+    return request(client, {
+        method: "GET",
+        path: `workspaces/${workspaceId}/clients`
+    }).then(response => response as Response<Client[]>);
 }
