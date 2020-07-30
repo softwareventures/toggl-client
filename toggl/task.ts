@@ -7,7 +7,9 @@ import {request, Response} from "./request-response";
  * Available only for paid workspaces.
  */
 
-export interface Task extends CreateTaskOptions, UpdateTaskOptions {
+export interface Task extends CreateTaskOptions {
+    /** Task ID. */
+    readonly id: number;
     /** ID of the Workspace that this Task belongs to. */
     readonly wid: number;
     /** True if the Task is in progress, false if it is done. */
@@ -19,6 +21,8 @@ export interface Task extends CreateTaskOptions, UpdateTaskOptions {
 }
 
 export interface CreateTaskOptions extends UpdateTaskOptions {
+    /** Name of the Task. Must be unique within the associated Project. */
+    readonly name: string;
     /** ID of the Project that this Task belongs to. */
     readonly pid: number;
     /** ID of the Workspace that this Task belongs to. */
@@ -29,20 +33,17 @@ export interface CreateTaskOptions extends UpdateTaskOptions {
     readonly active?: boolean;
 }
 
-export interface UpdateTaskOptions extends TaskBase {
+export interface UpdateTaskOptions {
     /** Task ID. */
     readonly id: number;
+    /** Name of the Task. Must be unique within the associated Project. */
+    readonly name?: string;
     /** ID of the User this Task is assigned to. */
     readonly uid?: number;
     /** Estimated duration of the Task in seconds. */
     readonly estimated_seconds?: number;
     /** True if the Task is in progress, false if it is done. */
     readonly active?: boolean;
-}
-
-export interface TaskBase {
-    /** Name of the Task. Must be unique within the associated Project. */
-    readonly name: string;
 }
 
 export async function createTask(
