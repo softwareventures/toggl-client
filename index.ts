@@ -2,11 +2,11 @@ import {resolve} from "url";
 export * from "./toggl/authentication";
 export * from "./toggl/client";
 export * from "./toggl/project";
-export * from "./toggl/request-response";
-export * from "./toggl/user";
 export * from "./toggl/project-user";
+export * from "./toggl/request-response";
 export * from "./toggl/tag";
 export * from "./toggl/time-entry";
+export * from "./toggl/user";
 export * from "./toggl/workspace";
 
 export interface ApiClient {
