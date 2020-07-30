@@ -3,6 +3,7 @@ import {Client} from "./client";
 import {Group} from "./group";
 import {Project} from "./project";
 import {request, Response} from "./request-response";
+import {Tag} from "./tag";
 import {Task} from "./task";
 import {User} from "./user";
 
@@ -175,4 +176,14 @@ export async function getWorkspaceTasks(
         method: "GET",
         path: `workspace/${options.workspaceId}/tasks?active=${options.active ?? true}`
     }).then(response => response as Response<Task[]>);
+}
+
+export async function getWorkspaceTags(
+    client: AuthenticatedApiClient,
+    workspaceId: number
+): Promise<Response<Tag[]>> {
+    return request(client, {
+        method: "GET",
+        path: `workspace/${workspaceId}/tags`
+    }).then(response => response as Response<Tag[]>);
 }
