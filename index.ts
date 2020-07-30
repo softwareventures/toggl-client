@@ -5,6 +5,7 @@ export * from "./toggl/project";
 export * from "./toggl/project-user";
 export * from "./toggl/request-response";
 export * from "./toggl/tag";
+export * from "./toggl/task";
 export * from "./toggl/time-entry";
 export * from "./toggl/user";
 export * from "./toggl/workspace";
