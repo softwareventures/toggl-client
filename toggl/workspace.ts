@@ -3,6 +3,7 @@ import {Client} from "./client";
 import {Group} from "./group";
 import {Project} from "./project";
 import {request, Response} from "./request-response";
+import {Task} from "./task";
 import {User} from "./user";
 
 /**
@@ -153,4 +154,25 @@ export async function getWorkspaceProjects(
             `?active=${options.active ?? true}` +
             `&only_templates=${options.only_templates ?? false}`
     }).then(response => response as Response<Project[]>);
+}
+
+export interface GetWorkspaceTasksOptions {
+    /** The Workspace ID. */
+    readonly workspaceId: number;
+    /** If true, only active tasks are returned.
+     * If false, only completed tasks are returned.
+     *
+     * @default true */
+    readonly active?: boolean | "both";
+}
+
+/** Available only for paid workspaces. */
+export async function getWorkspaceTasks(
+    client: AuthenticatedApiClient,
+    options: GetWorkspaceTasksOptions
+): Promise<Response<Task[]>> {
+    return request(client, {
+        method: "GET",
+        path: `workspace/${options.workspaceId}/tasks?active=${options.active ?? true}`
+    }).then(response => response as Response<Task[]>);
 }
