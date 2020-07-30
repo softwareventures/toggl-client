@@ -84,6 +84,7 @@ export async function updateTask(
         path: `tasks/${options.id}`,
         body: {
             task: {
+                name: options.name,
                 uid: options.uid,
                 estimated_seconds: options.estimated_seconds,
                 active: options.active
