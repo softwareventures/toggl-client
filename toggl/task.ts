@@ -82,3 +82,13 @@ export async function updateTask(
         }
     }).then(response => response as Response<Task>);
 }
+
+export async function deleteTask(
+    client: AuthenticatedApiClient,
+    taskId: number
+): Promise<Response<object>> {
+    return request(client, {
+        method: "DELETE",
+        path: `tasks/${taskId}`
+    }).then(response => response as Response<object>);
+}
