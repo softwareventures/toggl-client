@@ -44,3 +44,10 @@ export async function createTask(client: AuthenticatedApiClient, options: Create
         body: {task: options}
     }).then(response => response as Response<Task>);
 }
+
+export async function getTask(client: AuthenticatedApiClient, taskId: number): Promise<Response<Task>> {
+    return request(client, {
+        method: "GET",
+        path: `tasks/${taskId}`
+    }).then(response => response as Response<Task>);
+}
