@@ -33,9 +33,17 @@ export interface CreateTaskOptions extends UpdateTaskOptions {
     readonly active?: boolean;
 }
 
-export interface UpdateTaskOptions {
+export interface UpdateTaskOptions extends UpdateTaskOptionsBase {
     /** Task ID. */
     readonly id: number;
+}
+
+export interface UpdateTasksOptions extends UpdateTaskOptionsBase {
+    /** Task IDs. */
+    readonly ids: readonly number[];
+}
+
+export interface UpdateTaskOptionsBase {
     /** Name of the Task. Must be unique within the associated Project. */
     readonly name?: string;
     /** ID of the User this Task is assigned to. */
@@ -92,4 +100,22 @@ export async function deleteTask(
         method: "DELETE",
         path: `tasks/${taskId}`
     }).then(response => response as Response<object>);
+}
+
+export async function updateTasks(
+    client: AuthenticatedApiClient,
+    options: UpdateTasksOptions
+): Promise<Response<Task[]>> {
+    return request(client, {
+        method: "PUT",
+        path: `tasks/${options.ids.join(",")}`,
+        body: {
+            task: {
+                name: options.name,
+                uid: options.uid,
+                estimated_seconds: options.estimated_seconds,
+                active: options.active
+            }
+        }
+    }).then(response => response as Response<Task[]>);
 }
