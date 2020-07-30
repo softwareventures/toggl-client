@@ -120,3 +120,13 @@ export async function updateTasks(
         }
     }).then(response => response as Response<Task[]>);
 }
+
+export async function deleteTasks(
+    client: AuthenticatedApiClient,
+    taskIds: readonly number[]
+): Promise<Response<object>> {
+    return request(client, {
+        method: "DELETE",
+        path: `tasks/${taskIds.join(",")}`
+    }).then(response => response as Response<object>);
+}
