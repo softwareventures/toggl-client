@@ -37,7 +37,10 @@ export interface CreateTaskOptions {
     readonly active?: boolean;
 }
 
-export async function createTask(client: AuthenticatedApiClient, options: CreateTaskOptions): Promise<Response<Task>> {
+export async function createTask(
+    client: AuthenticatedApiClient,
+    options: CreateTaskOptions
+): Promise<Response<Task>> {
     return request(client, {
         method: "POST",
         path: "tasks",
@@ -45,7 +48,10 @@ export async function createTask(client: AuthenticatedApiClient, options: Create
     }).then(response => response as Response<Task>);
 }
 
-export async function getTask(client: AuthenticatedApiClient, taskId: number): Promise<Response<Task>> {
+export async function getTask(
+    client: AuthenticatedApiClient,
+    taskId: number
+): Promise<Response<Task>> {
     return request(client, {
         method: "GET",
         path: `tasks/${taskId}`
