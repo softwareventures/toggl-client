@@ -26,6 +26,13 @@ export interface InviteWorkspaceUsersOptions {
     readonly emails: readonly string[];
 }
 
+export interface UpdateWorkspaceUserOptions {
+    /** WorkspaceUser ID. */
+    readonly id: number;
+    /** True if the User is an administrator of the Workspace. */
+    readonly admin: boolean;
+}
+
 /** Invites Users to join a Workspace.
  *
  * Toggl sends an invitation email to each User's email address. */
@@ -38,4 +45,15 @@ export async function inviteWorkspaceUsers(
         path: `workspaces/${options.workspaceId}/invite`,
         body: {emails: options.emails}
     }).then(response => response as Response<WorkspaceUser[]>);
+}
+
+export async function updateWorkspaceUser(
+    client: AuthenticatedApiClient,
+    options: UpdateWorkspaceUserOptions
+): Promise<Response<WorkspaceUser>> {
+    return request(client, {
+        method: "PUT",
+        path: `workspace_users/${options.id}`,
+        body: {workspace_user: {admin: options.admin}}
+    }).then(response => response as Response<WorkspaceUser>);
 }
