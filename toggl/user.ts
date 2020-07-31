@@ -83,7 +83,7 @@ export interface UpdateUserOptions {
     readonly password?: string;
 }
 
-export async function getCurrentUser(client: AuthenticatedApiClient): Promise<Response<User>> {
+export async function fetchCurrentUser(client: AuthenticatedApiClient): Promise<Response<User>> {
     return request(client, {method: "GET", path: "me"}).then(
         response => response as Response<User>
     );

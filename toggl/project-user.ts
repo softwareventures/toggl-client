@@ -59,7 +59,7 @@ export async function createProjectUser(
     }).then(response => response as Response<ProjectUser>);
 }
 
-export async function getProjectUser(
+export async function fetchProjectUser(
     client: AuthenticatedApiClient,
     projectUserId: number
 ): Promise<Response<ProjectUser>> {

@@ -65,7 +65,7 @@ export async function createTask(
     }).then(response => response as Response<Task>);
 }
 
-export async function getTask(
+export async function fetchTask(
     client: AuthenticatedApiClient,
     taskId: number
 ): Promise<Response<Task>> {

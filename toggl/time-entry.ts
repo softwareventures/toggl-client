@@ -105,7 +105,7 @@ export async function stopTimeEntry(
     }).then(response => response as Response<TimeEntry>);
 }
 
-export async function getTimeEntry(
+export async function fetchTimeEntry(
     client: AuthenticatedApiClient,
     id: number
 ): Promise<Response<TimeEntry>> {
@@ -115,7 +115,7 @@ export async function getTimeEntry(
     }).then(response => response as Response<TimeEntry>);
 }
 
-export async function getRunningTimeEntry(
+export async function fetchRunningTimeEntry(
     client: AuthenticatedApiClient
 ): Promise<Response<TimeEntry>> {
     return request(client, {

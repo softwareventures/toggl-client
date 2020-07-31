@@ -36,7 +36,7 @@ export async function createClient(
     );
 }
 
-export async function getClient(
+export async function fetchClient(
     apiClient: AuthenticatedApiClient,
     clientId: number
 ): Promise<Response<Client>> {
@@ -65,7 +65,7 @@ export async function deleteClient(
     );
 }
 
-export async function getClients(
+export async function fetchClients(
     apiClient: AuthenticatedApiClient
 ): Promise<Response<readonly Client[]>> {
     return request(apiClient, {method: "GET", path: "clients"}).then(

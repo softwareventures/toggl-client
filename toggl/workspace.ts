@@ -60,7 +60,7 @@ export interface UpdateWorkspaceOptions {
     readonly rounding_minutes?: number;
 }
 
-export async function getWorkspaces(
+export async function fetchWorkspaces(
     client: AuthenticatedApiClient
 ): Promise<Response<Workspace[]>> {
     return request(client, {
@@ -69,7 +69,7 @@ export async function getWorkspaces(
     }).then(response => response as Response<Workspace[]>);
 }
 
-export async function getWorkspace(
+export async function fetchWorkspace(
     client: AuthenticatedApiClient,
     id: number
 ): Promise<Response<Workspace>> {
@@ -110,7 +110,7 @@ export async function getWorkspaceUsers(
     }).then(response => response as Response<User[]>);
 }
 
-export async function getWorkspaceClients(
+export async function fetchWorkspaceClients(
     client: AuthenticatedApiClient,
     workspaceId: number
 ): Promise<Response<Client[]>> {
@@ -120,7 +120,7 @@ export async function getWorkspaceClients(
     }).then(response => response as Response<Client[]>);
 }
 
-export async function getWorkspaceGroups(
+export async function fetchWorkspaceGroups(
     client: AuthenticatedApiClient,
     workspaceId: number
 ): Promise<Response<Group[]>> {
@@ -144,7 +144,7 @@ export interface GetWorkspaceProjectsOptions {
     readonly only_templates: boolean;
 }
 
-export async function getWorkspaceProjects(
+export async function fetchWorkspaceProjects(
     client: AuthenticatedApiClient,
     options: GetWorkspaceProjectsOptions
 ): Promise<Response<Project[]>> {
@@ -168,7 +168,7 @@ export interface GetWorkspaceTasksOptions {
 }
 
 /** Available only for paid workspaces. */
-export async function getWorkspaceTasks(
+export async function fetchWorkspaceTasks(
     client: AuthenticatedApiClient,
     options: GetWorkspaceTasksOptions
 ): Promise<Response<Task[]>> {
@@ -178,7 +178,7 @@ export async function getWorkspaceTasks(
     }).then(response => response as Response<Task[]>);
 }
 
-export async function getWorkspaceTags(
+export async function fetchWorkspaceTags(
     client: AuthenticatedApiClient,
     workspaceId: number
 ): Promise<Response<Tag[]>> {

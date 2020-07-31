@@ -65,7 +65,7 @@ export async function createProject(
     );
 }
 
-export async function getProject(
+export async function fetchProject(
     client: AuthenticatedApiClient,
     projectId: number
 ): Promise<Response<Project>> {
