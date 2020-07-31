@@ -57,3 +57,13 @@ export async function updateWorkspaceUser(
         body: {workspace_user: {admin: options.admin}}
     }).then(response => response as Response<WorkspaceUser>);
 }
+
+export async function deleteWorkspaceUser(
+    client: AuthenticatedApiClient,
+    workspaceUserId: number
+): Promise<Response<object>> {
+    return request(client, {
+        method: "DELETE",
+        path: `workspace_users/${workspaceUserId}`
+    }).then(response => response as Response<object>);
+}
