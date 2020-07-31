@@ -9,6 +9,7 @@ export * from "./toggl/task";
 export * from "./toggl/time-entry";
 export * from "./toggl/user";
 export * from "./toggl/workspace";
+export * from "./toggl/workspace-user";
 
 export interface ApiClient {
     readonly fetch: typeof fetch;
