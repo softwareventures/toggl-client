@@ -100,7 +100,7 @@ export async function updateWorkspace(
     }).then(response => response as Response<Workspace>);
 }
 
-export async function getWorkspaceUsers(
+export async function fetchWorkspaceUsers(
     client: AuthenticatedApiClient,
     workspaceId: number
 ): Promise<Response<User[]>> {
@@ -130,7 +130,7 @@ export async function fetchWorkspaceGroups(
     }).then(response => response as Response<Group[]>);
 }
 
-export interface GetWorkspaceProjectsOptions {
+export interface FetchWorkspaceProjectsOptions {
     /** The Workspace ID. */
     readonly workspaceId: number;
     /** If true, only active projects are returned.
@@ -146,7 +146,7 @@ export interface GetWorkspaceProjectsOptions {
 
 export async function fetchWorkspaceProjects(
     client: AuthenticatedApiClient,
-    options: GetWorkspaceProjectsOptions
+    options: FetchWorkspaceProjectsOptions
 ): Promise<Response<Project[]>> {
     return request(client, {
         method: "GET",
@@ -157,7 +157,7 @@ export async function fetchWorkspaceProjects(
     }).then(response => response as Response<Project[]>);
 }
 
-export interface GetWorkspaceTasksOptions {
+export interface FetchWorkspaceTasksOptions {
     /** The Workspace ID. */
     readonly workspaceId: number;
     /** If true, only active tasks are returned.
@@ -170,7 +170,7 @@ export interface GetWorkspaceTasksOptions {
 /** Available only for paid workspaces. */
 export async function fetchWorkspaceTasks(
     client: AuthenticatedApiClient,
-    options: GetWorkspaceTasksOptions
+    options: FetchWorkspaceTasksOptions
 ): Promise<Response<Task[]>> {
     return request(client, {
         method: "GET",

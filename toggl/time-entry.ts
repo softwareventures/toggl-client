@@ -159,7 +159,7 @@ export async function deleteTimeEntry(
     }).then(response => response as Response<object>);
 }
 
-export async function getTimeEntriesInRange(
+export async function fetchTimeEntriesInRange(
     client: AuthenticatedApiClient,
     start: string,
     end: string

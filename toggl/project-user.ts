@@ -90,7 +90,7 @@ export async function deleteProjectUser(
     }).then(response => response as Response<object>);
 }
 
-export async function getProjectUsers(
+export async function fetchProjectUsers(
     client: AuthenticatedApiClient,
     workspaceId: number
 ): Promise<Response<ProjectUser[]>> {
