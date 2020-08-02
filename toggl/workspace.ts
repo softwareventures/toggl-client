@@ -120,7 +120,7 @@ export async function fetchClientsInWorkspace(
     }).then(response => response as Response<Client[]>);
 }
 
-export async function fetchWorkspaceGroups(
+export async function fetchGroupsInWorkspace(
     client: AuthenticatedApiClient,
     workspaceId: number
 ): Promise<Response<Group[]>> {
