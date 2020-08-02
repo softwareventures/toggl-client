@@ -1,6 +1,7 @@
 import {resolve} from "url";
 export * from "./toggl/authentication";
 export * from "./toggl/client";
+export * from "./toggl/dashboard";
 export * from "./toggl/project";
 export * from "./toggl/project-user";
 export * from "./toggl/request-response";
