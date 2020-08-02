@@ -1,8 +1,8 @@
+import {request, Response} from "../api-client/request-response";
 import {AuthenticatedApiClient} from "./authentication";
 import {Client} from "./client";
 import {Group} from "./group";
 import {Project} from "./project";
-import {request, Response} from "./request-response";
 import {Tag} from "./tag";
 import {Task} from "./task";
 import {User} from "./user";

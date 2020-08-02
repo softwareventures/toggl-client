@@ -1,5 +1,5 @@
 import {AuthenticatedApiClient} from "../index";
-import {request, Response} from "./request-response";
+import {request, Response} from "../api-client/request-response";
 
 /**
  * @file Users

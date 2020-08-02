@@ -1,5 +1,6 @@
-import {ApiClient, mapResponse} from "../index";
-import {request, Response} from "./request-response";
+import {ApiClient} from "../api-client/api-client";
+import {mapResponse} from "../index";
+import {request, Response} from "../api-client/request-response";
 import {User} from "./user";
 
 /**

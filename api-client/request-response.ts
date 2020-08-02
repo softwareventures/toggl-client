@@ -1,6 +1,6 @@
 import {resolve} from "url";
-import {ApiClient} from "../index";
-import {Authorization} from "./authentication";
+import {Authorization} from "../toggl/authentication";
+import {ApiClient} from "./api-client";
 
 /**
  * @file Common Toggl API Client components

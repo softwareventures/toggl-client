@@ -1,5 +1,5 @@
+import {request, Response} from "../api-client/request-response";
 import {AuthenticatedApiClient} from "./authentication";
-import {request, Response} from "./request-response";
 
 /** @file Workspace Users
  * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspace_users.md */

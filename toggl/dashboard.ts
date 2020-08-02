@@ -1,5 +1,5 @@
+import {request, Response} from "../api-client/request-response";
 import {AuthenticatedApiClient} from "./authentication";
-import {request, Response} from "./request-response";
 
 export interface Dashboard {
     /** Information about the 20 most recent TimeEntries recorded in
