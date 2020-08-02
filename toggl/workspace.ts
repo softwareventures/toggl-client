@@ -110,7 +110,7 @@ export async function fetchUsersInWorkspace(
     }).then(response => response as Response<User[]>);
 }
 
-export async function fetchWorkspaceClients(
+export async function fetchClientsInWorkspace(
     client: AuthenticatedApiClient,
     workspaceId: number
 ): Promise<Response<Client[]>> {
