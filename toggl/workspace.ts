@@ -178,7 +178,7 @@ export async function fetchTasksInWorkspace(
     }).then(response => response as Response<Task[]>);
 }
 
-export async function fetchWorkspaceTags(
+export async function fetchTagsInWorkspace(
     client: AuthenticatedApiClient,
     workspaceId: number
 ): Promise<Response<Tag[]>> {
