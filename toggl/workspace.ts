@@ -130,7 +130,7 @@ export async function fetchGroupsInWorkspace(
     }).then(response => response as Response<Group[]>);
 }
 
-export interface FetchWorkspaceProjectsOptions {
+export interface FetchProjectsInWorkspaceOptions {
     /** The Workspace ID. */
     readonly workspaceId: number;
     /** If true, only active projects are returned.
@@ -144,9 +144,9 @@ export interface FetchWorkspaceProjectsOptions {
     readonly only_templates: boolean;
 }
 
-export async function fetchWorkspaceProjects(
+export async function fetchProjectsInWorkspace(
     client: AuthenticatedApiClient,
-    options: FetchWorkspaceProjectsOptions
+    options: FetchProjectsInWorkspaceOptions
 ): Promise<Response<Project[]>> {
     return request(client, {
         method: "GET",
