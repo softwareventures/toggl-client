@@ -157,7 +157,7 @@ export async function fetchProjectsInWorkspace(
     }).then(response => response as Response<Project[]>);
 }
 
-export interface FetchWorkspaceTasksOptions {
+export interface FetchTasksInWorkspaceOptions {
     /** The Workspace ID. */
     readonly workspaceId: number;
     /** If true, only active tasks are returned.
@@ -168,9 +168,9 @@ export interface FetchWorkspaceTasksOptions {
 }
 
 /** Available only for paid workspaces. */
-export async function fetchWorkspaceTasks(
+export async function fetchTasksInWorkspace(
     client: AuthenticatedApiClient,
-    options: FetchWorkspaceTasksOptions
+    options: FetchTasksInWorkspaceOptions
 ): Promise<Response<Task[]>> {
     return request(client, {
         method: "GET",
