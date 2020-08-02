@@ -67,3 +67,13 @@ export async function deleteWorkspaceUser(
         path: `workspace_users/${workspaceUserId}`
     }).then(response => response as Response<object>);
 }
+
+export async function fetchWorkspaceUsers(
+    client: AuthenticatedApiClient,
+    workspaceId: number
+): Promise<Response<WorkspaceUser[]>> {
+    return request(client, {
+        method: "GET",
+        path: `workspaces/${workspaceId}/workspace_users`
+    }).then(response => response as Response<WorkspaceUser[]>);
+}
