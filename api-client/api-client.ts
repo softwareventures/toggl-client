@@ -20,9 +20,9 @@ export interface ApiClientOptions {
 
 export function createApiClient(options: ApiClientOptions): ApiClient {
     const fetch = options.fetch;
-    const endpoint = options?.endpoint || "https://toggl.com/";
-    const mainEndpoint = resolve(endpoint, options?.mainEndpoint || "api/v8");
-    const reportsEndpoint = resolve(endpoint, options?.reportsEndpoint || "reports/api/v2");
+    const endpoint = options.endpoint ?? "https://toggl.com/";
+    const mainEndpoint = resolve(endpoint, options.mainEndpoint ?? "api/v8");
+    const reportsEndpoint = resolve(endpoint, options.reportsEndpoint ?? "reports/api/v2");
 
     return {fetch, mainEndpoint, reportsEndpoint};
 }
