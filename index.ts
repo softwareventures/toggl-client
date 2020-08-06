@@ -1,5 +1,6 @@
 export * from "./api-client/api-client";
 export * from "./api-client/request-response";
+export * from "./report/options";
 export * from "./toggl/authentication";
 export * from "./toggl/client";
 export * from "./toggl/dashboard";
