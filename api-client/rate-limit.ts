@@ -6,6 +6,7 @@ export interface RateLimiterOptions {
     readonly maxRetries?: number;
 }
 
+/** @internal */
 export class RateLimiter {
     public readonly retryIntervalMs: number;
     public readonly maxIntervalMs: number;
