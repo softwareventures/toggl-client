@@ -21,6 +21,9 @@
     "semantic-release": "semantic-release",
     "test": "ava"
   },
+  "engines": {
+    "node": "^12 || ^14 || >=16"
+  },
   "dependencies": {
     "@types/node": ">=10.0.0 || 14.14.41",
     "tslib": "2.3.0"
