@@ -1,11 +1,12 @@
-import {request, Response} from "../api-client/request-response";
-import {AuthenticatedApiClient} from "./authentication";
-import {Client} from "./client";
-import {Group} from "./group";
-import {Project} from "./project";
-import {Tag} from "./tag";
-import {Task} from "./task";
-import {User} from "./user";
+import type {Response} from "../api-client/request-response";
+import {request} from "../api-client/request-response";
+import type {AuthenticatedApiClient} from "./authentication";
+import type {Client} from "./client";
+import type {Group} from "./group";
+import type {Project} from "./project";
+import type {Tag} from "./tag";
+import type {Task} from "./task";
+import type {User} from "./user";
 
 /**
  * @file Workspaces
@@ -13,8 +14,11 @@ import {User} from "./user";
  */
 
 export enum RoundingType {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     Down = -1,
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     Nearest = 0,
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     Up = 1
 }
 

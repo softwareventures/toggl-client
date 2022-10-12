@@ -1,5 +1,6 @@
 import {resolve} from "url";
-import {RateLimiter, RateLimiterOptions} from "./rate-limit";
+import type {RateLimiterOptions} from "./rate-limit";
+import {RateLimiter} from "./rate-limit";
 
 /**
  * @file Common Toggl API Client components

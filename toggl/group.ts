@@ -1,5 +1,6 @@
-import {request, Response} from "../api-client/request-response";
-import {AuthenticatedApiClient} from "./authentication";
+import type {Response} from "../api-client/request-response";
+import {request} from "../api-client/request-response";
+import type {AuthenticatedApiClient} from "./authentication";
 
 /** @file Groups
  * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/groups.md */

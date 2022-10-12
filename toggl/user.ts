@@ -1,5 +1,6 @@
-import {AuthenticatedApiClient} from "../index";
-import {request, Response} from "../api-client/request-response";
+import type {AuthenticatedApiClient} from "../index";
+import type {Response} from "../api-client/request-response";
+import {request} from "../api-client/request-response";
 
 /**
  * @file Users

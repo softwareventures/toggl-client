@@ -1,4 +1,4 @@
-import {Response} from "./request-response";
+import type {Response} from "./request-response";
 
 export interface RateLimiterOptions {
     readonly baseIntervalMs?: number;
@@ -35,7 +35,7 @@ export class RateLimiter {
         });
     }
 
-    private onInterval = (): void => {
+    private readonly onInterval = (): void => {
         const action = this.queue.shift();
         if (action != null) {
             action();

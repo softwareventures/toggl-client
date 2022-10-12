@@ -1,5 +1,6 @@
-import {request, Response} from "../api-client/request-response";
-import {AuthenticatedApiClient} from "./authentication";
+import type {Response} from "../api-client/request-response";
+import {request} from "../api-client/request-response";
+import type {AuthenticatedApiClient} from "./authentication";
 
 /**
  * @file Tasks
