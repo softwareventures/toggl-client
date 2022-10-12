@@ -46,7 +46,7 @@ export async function request(
     client: ApiClient | ApiClientWithAuthorization,
     request: Request<unknown>
 ): Promise<Response<unknown>> {
-    const body = request.method === "POST" ? JSON.stringify(request.body) : undefined;
+    const body = request.method === "POST" ? JSON.stringify(request.body) : null;
 
     return client.rateLimiter.rateLimit(async () =>
         client
