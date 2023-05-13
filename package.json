@@ -25,7 +25,7 @@
     "node": "^14 || ^16 || >=18"
   },
   "dependencies": {
-    "@types/node": "14.18.46",
+    "@types/node": "14.18.47",
     "tslib": "2.5.0",
     "unknown": "^0.2.5"
   },
